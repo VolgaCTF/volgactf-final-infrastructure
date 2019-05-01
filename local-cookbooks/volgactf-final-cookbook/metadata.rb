@@ -6,6 +6,7 @@ description 'Install and configure VolgaCTF Final servers'
 version '1.0.0'
 
 depends 'redisio', '~> 3.0.0'
+depends 'postgresql', '~> 7.1.4'
 depends 'ntp', '~> 3.6.2'
 depends 'firewall', '~> 2.7.0'
 depends 'secret', '~> 1.0.0'

@@ -1,4 +1,21 @@
 vms:
+  postgres:
+    box: aspyatkin/ubuntu-18.04-server
+    box_version: ~> 1.2.0
+    ssh_insert_key: no
+    name: postgres.final.volgactf.test
+    memory: 1024
+    cpus: 2
+    hostname: postgres.final.volgactf.test
+    network:
+      private:
+        - ip: 172.20.0.3
+          netmask: 255.255.0.0
+    synced_folders:
+      - host: .
+        guest: /vagrant
+        opts:
+          disabled: yes
   redis:
     box: aspyatkin/ubuntu-18.04-server
     box_version: ~> 1.2.0

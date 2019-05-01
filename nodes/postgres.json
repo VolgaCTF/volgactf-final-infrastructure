@@ -1,0 +1,24 @@
+{
+  "name": "postgres",
+  "chef_environment": "development",
+  "normal": {
+    "knife_zero": {
+      "host": "postgres.final.volgactf.test"
+    },
+    "volgactf": {
+      "final": {
+        "postgres": {
+          "allow_access_from": [
+            "172.20.0.2/32"
+          ]
+        }
+      }
+    }
+  },
+  "automatic": {
+    "fqdn": "postgres.final.volgactf.test"
+  },
+  "run_list": [
+    "recipe[volgactf-final::postgres_server]"
+  ]
+}
