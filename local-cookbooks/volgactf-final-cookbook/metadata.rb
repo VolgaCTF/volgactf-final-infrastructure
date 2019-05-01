@@ -1,0 +1,11 @@
+name 'volgactf-final'
+maintainer 'VolgaCTF'
+maintainer_email 'aspyatkin@gmail.com'
+license 'MIT'
+description 'Install and configure VolgaCTF Final servers'
+version '1.0.0'
+
+depends 'redisio', '~> 3.0.0'
+depends 'ntp', '~> 3.6.2'
+depends 'firewall', '~> 2.7.0'
+depends 'secret', '~> 1.0.0'

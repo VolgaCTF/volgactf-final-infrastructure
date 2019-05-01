@@ -1,0 +1,24 @@
+{
+  "name": "redis",
+  "chef_environment": "development",
+  "normal": {
+    "knife_zero": {
+      "host": "redis.final.volgactf.test"
+    },
+    "volgactf": {
+      "final": {
+        "redis": {
+          "allow_access_from": [
+            "172.20.0.2/32"
+          ]
+        }
+      }
+    }
+  },
+  "automatic": {
+    "fqdn": "redis.final.volgactf.test"
+  },
+  "run_list": [
+    "recipe[volgactf-final::redis_server]"
+  ]
+}

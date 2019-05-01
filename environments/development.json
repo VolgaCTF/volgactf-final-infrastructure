@@ -1,0 +1,28 @@
+{
+  "name": "development",
+  "default_attributes": {
+    "firewall": {
+      "ubuntu_iptables": true,
+      "allow_loopback": true,
+      "allow_ssh": true,
+      "allow_icmp": true,
+      "ipv6_enabled": false
+    },
+    "ntp": {
+      "servers": [
+        "0.pool.ntp.org",
+        "1.pool.ntp.org",
+        "2.pool.ntp.org",
+        "3.pool.ntp.org"
+      ]
+    },
+    "volgactf": {
+      "final": {
+        "redis": {
+          "host": "172.20.0.4",
+          "port": 6379
+        }
+      }
+    }
+  }
+}

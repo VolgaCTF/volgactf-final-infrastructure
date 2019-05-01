@@ -1,0 +1,31 @@
+DEPENDENCIES
+  volgactf-final
+    path: local-cookbooks/volgactf-final-cookbook
+
+GRAPH
+  build-essential (8.2.1)
+    mingw (>= 1.1)
+    seven_zip (>= 0.0.0)
+  chef-sugar (5.0.1)
+  firewall (2.7.0)
+    chef-sugar (>= 0.0.0)
+  instance (2.0.1)
+  mingw (2.1.0)
+    seven_zip (>= 0.0.0)
+  ntp (3.6.2)
+  redisio (3.0.0)
+    build-essential (>= 5.0)
+    selinux_policy (>= 0.0.0)
+    ulimit (>= 0.1.2)
+  secret (1.0.0)
+    instance (~> 2.0.0)
+  selinux_policy (2.3.4)
+  seven_zip (3.1.0)
+    windows (>= 0.0.0)
+  ulimit (1.0.0)
+  volgactf-final (1.0.0)
+    firewall (~> 2.7.0)
+    ntp (~> 3.6.2)
+    redisio (~> 3.0.0)
+    secret (~> 1.0.0)
+  windows (6.0.0)
