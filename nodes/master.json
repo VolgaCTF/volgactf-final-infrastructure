@@ -1,0 +1,20 @@
+{
+  "name": "master",
+  "chef_environment": "development",
+  "normal": {
+    "knife_zero": {
+      "host": "master.final.volgactf.test"
+    },
+    "volgactf": {
+      "final": {
+
+      }
+    }
+  },
+  "automatic": {
+    "fqdn": "master.final.volgactf.test"
+  },
+  "run_list": [
+    "recipe[volgactf-final::master_server]"
+  ]
+}

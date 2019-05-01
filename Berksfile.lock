@@ -1,23 +1,53 @@
 DEPENDENCIES
+  latest-nodejs
+    git: https://github.com/aspyatkin/latest-nodejs.git
+    revision: e68bfb3108a92d6b3b19cfd1837e6629efad881b
+    tag: v2.0.0
+  localdns
+    git: https://github.com/aspyatkin/localdns-cookbook.git
+    revision: 67567227e0e8e9836f321e8d193e8017f4736901
+    tag: v2.1.0
   volgactf-final
     path: local-cookbooks/volgactf-final-cookbook
 
 GRAPH
+  agit (0.1.2)
+  ark (4.0.0)
+    build-essential (>= 0.0.0)
+    seven_zip (>= 0.0.0)
   build-essential (8.2.1)
     mingw (>= 1.1)
     seven_zip (>= 0.0.0)
   chef-sugar (5.0.1)
   firewall (2.7.0)
     chef-sugar (>= 0.0.0)
+  git (9.0.1)
+    build-essential (>= 5.0.0)
+  graphicsmagick (0.1.0)
   instance (2.0.1)
+  latest-nodejs (2.0.0)
+    nodejs (~> 6.0.0)
+  line (2.3.1)
+  localdns (2.1.0)
+    line (>= 2.3.0)
+  logrotate (2.2.0)
   mingw (2.1.0)
     seven_zip (>= 0.0.0)
+  ngx (2.1.1)
+    ohai (~> 5.2.5)
+  ngx-modules (1.1.0)
+    ngx (>= 2.0.0)
+  nodejs (6.0.0)
+    ark (>= 2.0.2)
+    build-essential (>= 5.0)
   ntp (3.6.2)
+  ohai (5.2.5)
   postgresql (7.1.4)
   redisio (3.0.0)
     build-essential (>= 5.0)
     selinux_policy (>= 0.0.0)
     ulimit (>= 0.1.2)
+  ruby_rbenv (2.1.2)
   secret (1.0.0)
     instance (~> 2.0.0)
   selinux_policy (2.3.4)
@@ -25,9 +55,20 @@ GRAPH
     windows (>= 0.0.0)
   ulimit (1.0.0)
   volgactf-final (1.0.0)
+    agit (~> 0.1.2)
     firewall (~> 2.7.0)
+    git (~> 9.0.1)
+    graphicsmagick (~> 0.1.0)
+    instance (~> 2.0.1)
+    latest-nodejs (~> 2.0.0)
+    line (>= 2.3.0)
+    localdns (~> 2.1.0)
+    logrotate (~> 2.2.0)
+    ngx (~> 2.1.1)
+    ngx-modules (~> 1.1.0)
     ntp (~> 3.6.2)
     postgresql (~> 7.1.4)
     redisio (~> 3.0.0)
+    ruby_rbenv (~> 2.1.2)
     secret (~> 1.0.0)
   windows (6.0.0)

@@ -32,7 +32,7 @@ include_recipe 'firewall::default'
 opt = node['volgactf']['final']['postgres']
 secret = ::ChefCookbook::Secret::Helper.new(node)
 
-postgresql_server_install "PostgreSQL Server #{opt['version']}" do
+postgresql_server_install 'PostgreSQL Server' do
   setup_repo true
   version opt['version']
   password secret.get('postgres:password:postgres', prefix_fqdn: false)

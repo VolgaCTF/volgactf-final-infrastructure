@@ -8,6 +8,10 @@
       "allow_icmp": true,
       "ipv6_enabled": false
     },
+    "latest-nodejs": {
+      "install": "lts",
+      "binary": true
+    },
     "ntp": {
       "servers": [
         "0.pool.ntp.org",
@@ -18,11 +22,30 @@
     },
     "volgactf": {
       "final": {
+        "dns": {
+          "records": [
+            {
+              "type": "A",
+              "name": "master.final.volgactf",
+              "ipv4_address": "172.20.0.2"
+            },
+            {
+              "type": "A",
+              "name": "postgres.final.volgactf",
+              "ipv4_address": "172.20.0.3"
+            },
+            {
+              "type": "A",
+              "name": "redis.final.volgactf",
+              "ipv4_address": "172.20.0.4"
+            }
+          ]
+        },
         "postgres": {
-          "host": "172.20.0.3"
+          "host": "postgres.final.volgactf"
         },
         "redis": {
-          "host": "172.20.0.4"
+          "host": "redis.final.volgactf"
         }
       }
     }
