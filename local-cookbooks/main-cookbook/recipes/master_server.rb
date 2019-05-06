@@ -33,6 +33,7 @@ include_recipe 'latest-nodejs::default'
 include_recipe 'graphicsmagick::default'
 include_recipe 'graphicsmagick::devel'
 include_recipe 'agit::cleanup'
+include_recipe 'yarn::default'
 
 opt = node['volgactf']['final']['master']
 instance = ::ChefCookbook::Instance::Helper.new(node)
@@ -62,7 +63,8 @@ git_client 'default' do
 end
 
 custom_dns 'default' do
-  listen '127.0.0.1'
+  listen_address '127.0.0.1'
+  bind_interfaces true
   records node['volgactf']['final']['dns']['records']
   action :install
 end
@@ -96,13 +98,13 @@ nginx_install 'default' do
 end
 
 nginx_conf 'gzip' do
-  cookbook 'volgactf-final'
+  cookbook 'main'
   template 'nginx/gzip.conf.erb'
   action :create
 end
 
 nginx_conf 'resolver' do
-  cookbook 'volgactf-final'
+  cookbook 'main'
   template 'nginx/resolver.conf.erb'
   variables(
     resolvers: %w[127.0.0.1],
@@ -113,7 +115,7 @@ nginx_conf 'resolver' do
 end
 
 nginx_conf 'realip' do
-  cookbook 'volgactf-final'
+  cookbook 'main'
   template 'nginx/realip.conf.erb'
   variables(
     header: 'X-Forwarded-For',
@@ -126,7 +128,7 @@ stub_status_host = '127.0.0.1'
 stub_status_port = 8099
 
 nginx_vhost 'stub_status' do
-  cookbook 'volgactf-final'
+  cookbook 'main'
   template 'nginx/stub_status.conf.erb'
   variables(
     host: stub_status_host,
@@ -162,4 +164,60 @@ logrotate_app 'nginx' do
   ]
   postrotate(lazy { "[ ! -f #{node.run_state['nginx']['pid']} ] || kill -USR1 `cat #{node.run_state['nginx']['pid']}`" })
   action :enable
+end
+
+if opt['development']
+  ssh_known_hosts_entry 'github.com'
+end
+
+
+volgactf_final_app 'default' do
+  user instance.user
+  user_home instance.user_home
+  group instance.group
+  development opt['development']
+  ruby_version opt['ruby']['version']
+
+  redis_host node['volgactf']['final']['redis']['host']
+  redis_port node['volgactf']['final']['redis']['port']
+  redis_password secret.get('redis:password', default: nil, prefix_fqdn: false)
+
+  postgres_host node['volgactf']['final']['postgres']['host']
+  postgres_port node['volgactf']['final']['postgres']['port']
+  postgres_db node['volgactf']['final']['postgres']['dbname']
+  postgres_user node['volgactf']['final']['postgres']['username']
+  postgres_password secret.get("postgres:password:#{node['volgactf']['final']['postgres']['username']}", prefix_fqdn: false)
+
+  fqdn opt['fqdn']
+  extra_fqdn opt['extra_fqdn']
+
+  auth_checker_username secret.get('volgactf-final:auth:checker:username', prefix_fqdn: false)
+  auth_checker_password secret.get('volgactf-final:auth:checker:password', prefix_fqdn: false)
+
+  auth_master_username secret.get('volgactf-final:auth:master:username', prefix_fqdn: false)
+  auth_master_password secret.get('volgactf-final:auth:master:password', prefix_fqdn: false)
+
+  flag_generator_secret secret.get('volgactf-final:flag:generator_secret', prefix_fqdn: false)
+  flag_sign_key_private secret.get('volgactf-final:flag:sign_key:private', prefix_fqdn: false)
+  flag_sign_key_public secret.get('volgactf-final:flag:sign_key:public', prefix_fqdn: false)
+
+  log_level 'DEBUG'
+
+  config node['volgactf']['final']['config']
+
+  customize_cookbook 'main'
+  customize_module 'customize.js'
+  customize_files(
+    'volgactf-logo.svg' => 'src/images/volgactf-logo.svg',
+    'volgactf-notify-logo.png' => 'src/images/volgactf-notify-logo.png'
+  )
+
+  action :install
+end
+
+firewall_rule 'http' do
+  port 80
+  source '0.0.0.0/0'
+  protocol :tcp
+  command :allow
 end

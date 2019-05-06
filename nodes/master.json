@@ -7,7 +7,12 @@
     },
     "volgactf": {
       "final": {
-
+        "master": {
+          "development": true,
+          "extra_fqdn": [
+            "final.volgactf.test"
+          ]
+        }
       }
     }
   },
@@ -15,6 +20,6 @@
     "fqdn": "master.final.volgactf.test"
   },
   "run_list": [
-    "recipe[volgactf-final::master_server]"
+    "recipe[main::master_server]"
   ]
 }

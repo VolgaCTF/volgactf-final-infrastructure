@@ -1,0 +1,33 @@
+{
+  "name": "checker1",
+  "chef_environment": "development",
+  "normal": {
+    "knife_zero": {
+      "host": "checker1.final.volgactf.test"
+    },
+    "volgactf": {
+      "final": {
+        "checker": {
+          "fqdn": "checker1.final.volgactf",
+          "environment": {
+            "THEMIS_FINALS_PING_ENABLED": "yes"
+          },
+          "network": {
+            "name": "checker1-network"
+          },
+          "image": {
+            "name": "checker1",
+            "repo": "volgactf/volgactf-final-devenv-checker",
+            "tag": "1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "automatic": {
+    "fqdn": "checker1.final.volgactf.test"
+  },
+  "run_list": [
+    "recipe[main::checker_server]"
+  ]
+}
