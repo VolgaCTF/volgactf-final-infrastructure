@@ -1,5 +1,5 @@
 {
-  "name": "development-example",
+  "name": "development",
   "default_attributes": {
     "firewall": {
       "ubuntu_iptables": true,
