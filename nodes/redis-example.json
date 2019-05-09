@@ -1,5 +1,5 @@
 {
-  "name": "redis",
+  "name": "redis-example",
   "chef_environment": "development",
   "normal": {
     "knife_zero": {

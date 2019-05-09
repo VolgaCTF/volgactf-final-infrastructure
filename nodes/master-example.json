@@ -1,5 +1,5 @@
 {
-  "name": "master",
+  "name": "master-example",
   "chef_environment": "development",
   "normal": {
     "knife_zero": {

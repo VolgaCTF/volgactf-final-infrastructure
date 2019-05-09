@@ -1,5 +1,5 @@
 {
-  "name": "checker1",
+  "name": "checker1-example",
   "chef_environment": "development",
   "normal": {
     "knife_zero": {

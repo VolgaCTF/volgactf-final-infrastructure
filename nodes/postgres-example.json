@@ -1,5 +1,5 @@
 {
-  "name": "postgres",
+  "name": "postgres-example",
   "chef_environment": "development",
   "normal": {
     "knife_zero": {
