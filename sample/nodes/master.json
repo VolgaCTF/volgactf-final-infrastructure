@@ -8,7 +8,6 @@
     "volgactf": {
       "final": {
         "master": {
-          "development": true,
           "extra_fqdn": [
             "final.volgactf.test"
           ]
