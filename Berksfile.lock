@@ -7,8 +7,8 @@ DEPENDENCIES
     path: local-cookbooks/main-cookbook
   volgactf-final
     git: https://github.com/VolgaCTF/volgactf-final-cookbook.git
-    revision: a95405b4d5815ebd3e71c107993d665ecfefed16
-    branch: master
+    revision: e142ba6a4c75a61018e8513f222c3be81fddc6e4
+    tag: v1.1.2
 
 GRAPH
   agit (0.1.2)
@@ -33,7 +33,7 @@ GRAPH
     nodejs (~> 6.0.0)
   line (2.3.1)
   logrotate (2.2.0)
-  main (1.1.1)
+  main (1.1.2)
     agit (~> 0.1.2)
     docker (~> 4.9.2)
     firewall (~> 2.7.0)
@@ -51,7 +51,7 @@ GRAPH
     ruby_rbenv (~> 2.1.2)
     secret (~> 1.0.0)
     ssh_known_hosts (~> 6.2.0)
-    volgactf-final (~> 1.1.1)
+    volgactf-final (~> 1.1.2)
     yarn (~> 0.4.2)
   mingw (2.1.0)
     seven_zip (>= 0.0.0)
@@ -86,7 +86,7 @@ GRAPH
     windows (>= 0.0.0)
   ssh_known_hosts (6.2.0)
   ulimit (1.0.0)
-  volgactf-final (1.1.1)
+  volgactf-final (1.1.2)
     agit (~> 0.1.2)
     htpasswd (~> 0.3.0)
     ngx (~> 2.1.1)
