@@ -64,6 +64,55 @@ postgresql_database opt['dbname'] do
   action :create
 end
 
+if opt['netdata']['enabled']
+  netdata_install 'default' do
+    install_method 'source'
+    git_repository opt['netdata']['git_repository']
+    git_revision opt['netdata']['git_revision']
+    git_source_directory '/opt/netdata'
+    autoupdate true
+    update true
+  end
+
+  netdata_config 'global' do
+    owner 'netdata'
+    group 'netdata'
+    configurations(
+      'memory mode' => 'none'
+    )
+  end
+
+  netdata_stream 'stream' do
+    owner 'netdata'
+    group 'netdata'
+    configurations(
+      'enabled' => 'yes',
+      'destination' => opt['netdata']['stream']['destination'],
+      'api key' => secret.get("netdata:stream:api_key:#{opt['netdata']['stream']['name']}", required: opt['netdata']['enabled'], prefix_fqdn: false)
+    )
+  end
+
+  package 'python-psycopg2'
+
+  netdata_python_plugin 'postgres' do
+    owner 'netdata'
+    group 'netdata'
+    global_configuration(
+      'retries' => 5,
+      'update_every' => 1
+    )
+    jobs(
+      'local' => {
+        'host' => '127.0.0.1',
+        'port' => opt['port'],
+        'database' => opt['dbname'],
+        'user' => 'postgres',
+        'password' => secret.get('postgres:password:postgres', prefix_fqdn: false)
+      }
+    )
+  end
+end
+
 opt['allow_access_from'].each do |ip_addr_block|
   postgresql_access "#{opt['username']} database access from #{ip_addr_block}" do
     access_type 'host'

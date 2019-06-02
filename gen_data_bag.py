@@ -6,6 +6,7 @@ from os import urandom
 from base64 import urlsafe_b64encode
 import json
 import argparse
+import uuid
 
 
 def get_random_str(size=16):
@@ -47,6 +48,18 @@ def main(name, environment):
                 'sign_key': {
                     'public': public_key.to_pem().decode('ascii').strip().replace('\n', "\n"),
                     'private': private_key.to_pem().decode('ascii').strip().replace('\n', "\n")
+                }
+            }
+        }
+    elif name == 'netdata':
+        return {
+            'id': 'development',
+            'stream': {
+                'api_key': {
+                    'master_server': str(uuid.uuid4()),
+                    'redis_server': str(uuid.uuid4()),
+                    'postgres_server': str(uuid.uuid4()),
+                    'checker1_server': str(uuid.uuid4())
                 }
             }
         }

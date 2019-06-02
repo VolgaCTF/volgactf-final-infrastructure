@@ -170,7 +170,6 @@ if opt['development']
   ssh_known_hosts_entry 'github.com'
 end
 
-
 volgactf_final_app 'default' do
   user instance.user
   user_home instance.user_home
@@ -213,6 +212,49 @@ volgactf_final_app 'default' do
   )
 
   action :install
+end
+
+if opt['netdata']['enabled']
+  netdata_install 'default' do
+    install_method 'source'
+    git_repository opt['netdata']['git_repository']
+    git_revision opt['netdata']['git_revision']
+    git_source_directory '/opt/netdata'
+    autoupdate true
+    update true
+  end
+
+  netdata_config 'global' do
+    owner 'netdata'
+    group 'netdata'
+    configurations(
+      'memory mode' => 'none'
+    )
+  end
+
+  netdata_stream 'stream' do
+    owner 'netdata'
+    group 'netdata'
+    configurations(
+      'enabled' => 'yes',
+      'destination' => opt['netdata']['stream']['destination'],
+      'api key' => secret.get("netdata:stream:api_key:#{opt['netdata']['stream']['name']}", required: opt['netdata']['enabled'], prefix_fqdn: false)
+    )
+  end
+
+  netdata_python_plugin 'nginx' do
+    owner 'netdata'
+    group 'netdata'
+    global_configuration(
+      'retries' => 5,
+      'update_every' => 1
+    )
+    jobs(
+      'local' => {
+        'url' => "http://#{stub_status_host}:#{stub_status_port}/stub_status"
+      }
+    )
+  end
 end
 
 firewall_rule 'http' do

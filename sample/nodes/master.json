@@ -10,7 +10,13 @@
         "master": {
           "extra_fqdn": [
             "final.volgactf.test"
-          ]
+          ],
+          "netdata": {
+            "enabled": true,
+            "stream": {
+              "destination": "172.20.0.5"
+            }
+          }
         }
       }
     }

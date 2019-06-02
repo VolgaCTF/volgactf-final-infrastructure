@@ -10,7 +10,13 @@
         "postgres": {
           "allow_access_from": [
             "172.20.0.2/32"
-          ]
+          ],
+          "netdata": {
+            "enabled": true,
+            "stream": {
+              "destination": "172.20.0.5"
+            }
+          }
         }
       }
     }

@@ -76,6 +76,56 @@ systemd_unit 'disable-thp.service' do
   notifies :restart, redis_service_resource, :delayed
 end
 
+if opt['netdata']['enabled']
+  netdata_install 'default' do
+    install_method 'source'
+    git_repository opt['netdata']['git_repository']
+    git_revision opt['netdata']['git_revision']
+    git_source_directory '/opt/netdata'
+    autoupdate true
+    update true
+  end
+
+  netdata_config 'global' do
+    owner 'netdata'
+    group 'netdata'
+    configurations(
+      'memory mode' => 'none'
+    )
+  end
+
+  netdata_stream 'stream' do
+    owner 'netdata'
+    group 'netdata'
+    configurations(
+      'enabled' => 'yes',
+      'destination' => opt['netdata']['stream']['destination'],
+      'api key' => secret.get("netdata:stream:api_key:#{opt['netdata']['stream']['name']}", required: opt['netdata']['enabled'], prefix_fqdn: false)
+    )
+  end
+
+  redis_plugin_conf = {
+    'host' => '127.0.0.1',
+    'port' => opt['port'],
+  }
+
+  unless secret.get('redis:password', default: nil, prefix_fqdn: false).nil?
+    redis_plugin_conf['pass'] = secret.get('redis:password', prefix_fqdn: false)
+  end
+
+  netdata_python_plugin 'redis' do
+    owner 'netdata'
+    group 'netdata'
+    global_configuration(
+      'retries' => 5,
+      'update_every' => 1
+    )
+    jobs(
+      'local' => redis_plugin_conf
+    )
+  end
+end
+
 opt['allow_access_from'].each do |ip_addr_block|
   firewall_rule "allow access to redis from #{ip_addr_block}" do
     port opt['port']

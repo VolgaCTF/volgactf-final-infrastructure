@@ -1,0 +1,50 @@
+{
+  "name": "monitor",
+  "chef_environment": "development",
+  "normal": {
+    "knife_zero": {
+      "host": "monitor.final.volgactf.test"
+    },
+    "volgactf": {
+      "final": {
+        "monitor": {
+          "allow_access_from": [
+            "172.20.0.0/24"
+          ],
+          "nginx": {
+            "fqdn": "monitor.final.volgactf.test"
+          },
+          "netdata": {
+            "listen": {
+              "host": "172.20.0.5"
+            },
+            "stream": {
+              "master_server": {
+                "origin": "172.20.0.2",
+                "history": 7200
+              },
+              "postgres_server": {
+                "origin": "172.20.0.3",
+                "history": 7200
+              },
+              "redis_server": {
+                "origin": "172.20.0.4",
+                "history": 7200
+              },
+              "checker1_server": {
+                "origin": "172.20.0.11",
+                "history": 7200
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "automatic": {
+    "fqdn": "monitor.final.volgactf.test"
+  },
+  "run_list": [
+    "recipe[main::monitor_server]"
+  ]
+}

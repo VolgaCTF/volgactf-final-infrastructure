@@ -19,6 +19,13 @@
             "name": "checker1",
             "repo": "volgactf/volgactf-final-devenv-checker",
             "tag": "1.0.0"
+          },
+          "netdata": {
+            "enabled": true,
+            "stream": {
+              "name": "checker1_server",
+              "destination": "172.20.0.5"
+            }
           }
         }
       }

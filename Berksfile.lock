@@ -5,6 +5,10 @@ DEPENDENCIES
     tag: v2.0.0
   main
     path: local-cookbooks/main-cookbook
+  netdata
+    git: https://github.com/jmadureira/netdata-cookbook.git
+    revision: 7858ca3cedac092db212f7497891544c6f5fc200
+    branch: 7858ca3cedac092db212f7497891544c6f5fc200
   volgactf-final
     git: https://github.com/VolgaCTF/volgactf-final-cookbook.git
     revision: e142ba6a4c75a61018e8513f222c3be81fddc6e4
@@ -12,7 +16,7 @@ DEPENDENCIES
 
 GRAPH
   agit (0.1.2)
-  apt (7.1.1)
+  apt (6.1.4)
   ark (4.0.0)
     build-essential (>= 0.0.0)
     seven_zip (>= 0.0.0)
@@ -20,6 +24,7 @@ GRAPH
     mingw (>= 1.1)
     seven_zip (>= 0.0.0)
   chef-sugar (5.0.1)
+  compat_resource (12.19.1)
   docker (4.9.2)
   firewall (2.7.0)
     chef-sugar (>= 0.0.0)
@@ -43,6 +48,7 @@ GRAPH
     latest-nodejs (~> 2.0.0)
     line (>= 2.3.0)
     logrotate (~> 2.2.0)
+    netdata (~> 0.4.1)
     ngx (~> 2.1.1)
     ngx-modules (~> 1.1.0)
     ntp (~> 3.6.2)
@@ -55,6 +61,9 @@ GRAPH
     yarn (~> 0.4.2)
   mingw (2.1.0)
     seven_zip (>= 0.0.0)
+  netdata (0.4.1)
+    apt (< 7.0.0)
+    yum-epel (< 3.0.0)
   ngx (2.1.1)
     ohai (~> 5.2.5)
   ngx-modules (1.1.0)
@@ -95,3 +104,5 @@ GRAPH
   windows (6.0.0)
   yarn (0.4.2)
     apt (>= 0.0.0)
+  yum-epel (2.1.2)
+    compat_resource (>= 12.16.3)
