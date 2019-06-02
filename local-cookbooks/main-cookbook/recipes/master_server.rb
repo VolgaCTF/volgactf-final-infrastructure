@@ -166,7 +166,7 @@ logrotate_app 'nginx' do
   action :enable
 end
 
-if opt['development']
+if opt['repo_mode'] == 'ssh'
   ssh_known_hosts_entry 'github.com'
 end
 
@@ -174,7 +174,10 @@ volgactf_final_app 'default' do
   user instance.user
   user_home instance.user_home
   group instance.group
-  development opt['development']
+
+  repo_mode opt['repo_mode']
+  run_mode opt['run_mode']
+
   ruby_version opt['ruby']['version']
 
   redis_host node['volgactf']['final']['redis']['host']
@@ -200,7 +203,7 @@ volgactf_final_app 'default' do
   flag_sign_key_private secret.get('volgactf-final:flag:sign_key:private', prefix_fqdn: false)
   flag_sign_key_public secret.get('volgactf-final:flag:sign_key:public', prefix_fqdn: false)
 
-  log_level 'DEBUG'
+  log_level opt['log_level']
 
   config node['volgactf']['final']['config']
 
