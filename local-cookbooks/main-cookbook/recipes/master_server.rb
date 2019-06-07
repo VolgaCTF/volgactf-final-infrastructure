@@ -39,6 +39,13 @@ opt = node['volgactf']['final']['master']
 instance = ::ChefCookbook::Instance::Helper.new(node)
 secret = ::ChefCookbook::Secret::Helper.new(node)
 
+if opt['vpn']['enabled']
+  vpn_connect 'default' do
+    config secret.get('openvpn:config', prefix_fqdn: false)
+    action :create
+  end
+end
+
 custom_ruby opt['ruby']['version'] do
   user instance.user
   group instance.group
@@ -114,12 +121,17 @@ nginx_conf 'resolver' do
   action :create
 end
 
+realip_from = %w[127.0.0.1]
+unless opt['vpn']['remote_server'].nil?
+  realip_from.push(opt['vpn']['remote_server'])
+end
+
 nginx_conf 'realip' do
   cookbook 'main'
   template 'nginx/realip.conf.erb'
   variables(
     header: 'X-Forwarded-For',
-    from: %w[127.0.0.1]
+    from: realip_from
   )
   action :create
 end

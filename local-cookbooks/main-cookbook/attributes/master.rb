@@ -13,3 +13,6 @@ default['volgactf']['final']['master']['netdata']['git_repository'] = 'https://g
 default['volgactf']['final']['master']['netdata']['git_revision'] = 'v1.15.0'
 default['volgactf']['final']['master']['netdata']['stream']['destination'] = nil
 default['volgactf']['final']['master']['netdata']['stream']['name'] = 'master_server'
+
+default['volgactf']['final']['master']['vpn']['enabled'] = false
+default['volgactf']['final']['master']['vpn']['remote_server'] = nil
