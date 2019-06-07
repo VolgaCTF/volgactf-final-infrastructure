@@ -22,7 +22,7 @@ depends 'line', '>= 2.3.0'
 depends 'logrotate', '~> 2.2.0'
 depends 'ssh_known_hosts', '~> 6.2.0'
 
-depends 'volgactf-final', '~> 1.1.3'
+depends 'volgactf-final', '~> 1.2.0'
 depends 'yarn', '~> 0.4.2'
 depends 'docker', '~> 4.9.2'
 depends 'netdata', '~> 0.4.1'

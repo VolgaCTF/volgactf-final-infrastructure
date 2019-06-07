@@ -11,8 +11,8 @@ DEPENDENCIES
     branch: 7858ca3cedac092db212f7497891544c6f5fc200
   volgactf-final
     git: https://github.com/VolgaCTF/volgactf-final-cookbook.git
-    revision: f50c998822665e755e4d2319b1c6fa6c1bed068f
-    tag: v1.1.3
+    revision: 4fa9f53c8d5c72f1e7b702e958e7be73dc23d44f
+    tag: v1.2.0
 
 GRAPH
   agit (0.1.2)
@@ -57,7 +57,7 @@ GRAPH
     ruby_rbenv (~> 2.1.2)
     secret (~> 1.0.0)
     ssh_known_hosts (~> 6.2.0)
-    volgactf-final (~> 1.1.3)
+    volgactf-final (~> 1.2.0)
     vpn (~> 0.2.3)
     yarn (~> 0.4.2)
   mingw (2.1.0)
@@ -95,12 +95,14 @@ GRAPH
   seven_zip (3.1.1)
     windows (>= 0.0.0)
   ssh_known_hosts (6.2.0)
+  tls (3.2.0)
   ulimit (1.0.0)
-  volgactf-final (1.1.3)
+  volgactf-final (1.2.0)
     agit (~> 0.1.2)
     htpasswd (~> 0.3.0)
     ngx (~> 2.1.1)
     ruby_rbenv (~> 2.1.2)
+    tls (~> 3.2.0)
     yarn (~> 0.4.2)
   vpn (0.2.3)
     firewall (~> 2.7.0)
