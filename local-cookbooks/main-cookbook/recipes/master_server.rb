@@ -225,7 +225,6 @@ volgactf_final_app 'default' do
     'volgactf-logo.svg' => 'src/images/volgactf-logo.svg',
     'volgactf-notify-logo.png' => 'src/images/volgactf-notify-logo.png'
   )
-
   action :install
 end
 
