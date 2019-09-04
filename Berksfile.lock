@@ -1,8 +1,4 @@
 DEPENDENCIES
-  latest-nodejs
-    git: https://github.com/aspyatkin/latest-nodejs.git
-    revision: e68bfb3108a92d6b3b19cfd1837e6629efad881b
-    tag: v2.0.0
   main
     path: local-cookbooks/main-cookbook
   netdata
@@ -11,8 +7,8 @@ DEPENDENCIES
     branch: 7858ca3cedac092db212f7497891544c6f5fc200
   volgactf-final
     git: https://github.com/VolgaCTF/volgactf-final-cookbook.git
-    revision: fc89c39ff856f3f6d3470bbace1a1642a04d8fcd
-    tag: v1.3.0
+    revision: aa9a19f96b618c88c321c5652ed6c9e3ca3753a8
+    tag: v1.4.0
 
 GRAPH
   agit (0.1.2)
@@ -25,7 +21,7 @@ GRAPH
     seven_zip (>= 0.0.0)
   chef-sugar (5.0.1)
   compat_resource (12.19.1)
-  docker (4.9.2)
+  docker (4.9.3)
   firewall (2.7.0)
     chef-sugar (>= 0.0.0)
   git (9.0.1)
@@ -34,30 +30,28 @@ GRAPH
   htpasswd (0.3.0)
     poise-python (>= 0.0.0)
   instance (2.0.1)
-  latest-nodejs (2.0.0)
-    nodejs (~> 6.0.0)
   line (2.4.1)
   logrotate (2.2.0)
-  main (1.2.0)
+  main (1.4.0)
     agit (~> 0.1.2)
     docker (~> 4.9.2)
     firewall (~> 2.7.0)
     git (~> 9.0.1)
     graphicsmagick (~> 0.1.0)
     instance (~> 2.0.1)
-    latest-nodejs (~> 2.0.0)
     line (>= 2.3.0)
     logrotate (~> 2.2.0)
     netdata (~> 0.4.1)
     ngx (~> 2.1.1)
     ngx-modules (~> 1.1.0)
+    nodejs (~> 6.0.0)
     ntp (~> 3.6.2)
     postgresql (~> 7.1.4)
     redisio (~> 3.0.0)
     ruby_rbenv (~> 2.1.2)
     secret (~> 1.0.0)
     ssh_known_hosts (~> 6.2.0)
-    volgactf-final (~> 1.3.0)
+    volgactf-final (~> 1.4.0)
     vpn (~> 0.2.3)
     yarn (~> 0.4.2)
   mingw (2.1.0)
@@ -97,13 +91,13 @@ GRAPH
   ssh_known_hosts (6.2.0)
   tls (3.2.0)
   ulimit (1.0.0)
-  volgactf-final (1.3.0)
+  volgactf-final (1.4.0)
     agit (~> 0.1.2)
     htpasswd (~> 0.3.0)
     ngx (~> 2.1.1)
+    nodejs (~> 6.0.0)
     ruby_rbenv (~> 2.1.2)
     tls (~> 3.2.0)
-    yarn (~> 0.4.2)
   vpn (0.2.3)
     firewall (~> 2.7.0)
     line (>= 2.3.0)

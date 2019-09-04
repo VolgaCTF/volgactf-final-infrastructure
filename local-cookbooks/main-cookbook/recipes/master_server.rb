@@ -29,10 +29,11 @@ package 'dnsutils'
 
 include_recipe 'ntp::default'
 include_recipe 'firewall::default'
-include_recipe 'latest-nodejs::default'
 include_recipe 'graphicsmagick::default'
 include_recipe 'graphicsmagick::devel'
 include_recipe 'agit::cleanup'
+
+include_recipe 'nodejs::nodejs_from_binary'
 include_recipe 'yarn::default'
 
 opt = node['volgactf']['final']['master']
@@ -219,12 +220,18 @@ volgactf_final_app 'default' do
 
   config node['volgactf']['final']['config']
 
-  customize_cookbook 'main'
-  customize_module 'customize.js'
-  customize_files(
-    'volgactf-logo.svg' => 'src/images/volgactf-logo.svg',
-    'volgactf-notify-logo.png' => 'src/images/volgactf-notify-logo.png'
-  )
+  branding_cookbook 'main'
+  branding_root 'branding-sample'
+  branding_folders %w[
+    images
+    js
+  ]
+  branding_files %w[
+    images/volgactf-logo.svg
+    js/content.js
+    js/logo.js
+    js/theme.js
+  ]
   action :install
 end
 
