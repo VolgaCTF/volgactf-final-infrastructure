@@ -29,51 +29,39 @@ package 'net-tools'
 include_recipe 'ntp::default'
 include_recipe 'firewall::default'
 
-opt = node['volgactf']['final']['redis']
+opt = node['volgactf']['final']['postgres']
 secret = ::ChefCookbook::Secret::Helper.new(node)
 
-node.default['redisio']['version'] = opt['version']
-node.default['redisio']['servers'] = [
-  {
-    name: nil,
-    address: '0.0.0.0',
-    port: opt['port'],
-    requirepass: secret.get('redis:password', default: nil, prefix_fqdn: false)
-  }
-]
-
-include_recipe 'redisio::default'
-include_recipe 'redisio::enable'
-
-redis_service_resource = "service[redis@#{opt['port']}]"
-
-sysctl 'net.core.somaxconn' do
-  value 512
-  action :apply
-  notifies :restart, redis_service_resource, :delayed
+postgresql_server_install 'PostgreSQL Server' do
+  setup_repo true
+  version opt['version']
+  password secret.get('postgres:password:postgres')
+  action %i[install create]
 end
 
-sysctl 'vm.overcommit_memory' do
-  value 1
-  action :apply
-  notifies :restart, redis_service_resource, :delayed
+service 'postgresql' do
+  action :nothing
 end
 
-systemd_unit 'disable-thp.service' do
-  content(
-    Unit: {
-      Description: 'Disable Transparent Huge Pages (THP)'
-    },
-    Service: {
-      Type: 'simple',
-      ExecStart: '/bin/sh -c "echo \'never\' > /sys/kernel/mm/transparent_hugepage/enabled && echo \'never\' > /sys/kernel/mm/transparent_hugepage/defrag"'
-    },
-    Install: {
-      WantedBy: 'multi-user.target'
-    }
-  )
-  action %i[create enable start]
-  notifies :restart, redis_service_resource, :delayed
+postgres_service_resource = 'service[postgresql]'
+
+postgresql_server_conf 'PostgreSQL Config' do
+  version opt['version']
+  port opt['port']
+  additional_config 'listen_addresses' => '0.0.0.0'
+  action :modify
+  notifies :reload, postgres_service_resource, :delayed
+end
+
+postgresql_user opt['username'] do
+  password secret.get("postgres:password:#{opt['username']}")
+  action :create
+end
+
+postgresql_database opt['dbname'] do
+  locale opt['dblocale']
+  owner opt['username']
+  action :create
 end
 
 if opt['netdata']['enabled']
@@ -104,16 +92,9 @@ if opt['netdata']['enabled']
     )
   end
 
-  redis_plugin_conf = {
-    'host' => '127.0.0.1',
-    'port' => opt['port'],
-  }
+  package 'python-psycopg2'
 
-  unless secret.get('redis:password', default: nil, prefix_fqdn: false).nil?
-    redis_plugin_conf['pass'] = secret.get('redis:password', prefix_fqdn: false)
-  end
-
-  netdata_python_plugin 'redis' do
+  netdata_python_plugin 'postgres' do
     owner 'netdata'
     group 'netdata'
     global_configuration(
@@ -121,13 +102,29 @@ if opt['netdata']['enabled']
       'update_every' => 1
     )
     jobs(
-      'local' => redis_plugin_conf
+      'local' => {
+        'host' => '127.0.0.1',
+        'port' => opt['port'],
+        'database' => opt['dbname'],
+        'user' => 'postgres',
+        'password' => secret.get('postgres:password:postgres')
+      }
     )
   end
 end
 
 opt['allow_access_from'].each do |ip_addr_block|
-  firewall_rule "allow access to redis from #{ip_addr_block}" do
+  postgresql_access "#{opt['username']} database access from #{ip_addr_block}" do
+    access_type 'host'
+    access_db opt['dbname']
+    access_user opt['username']
+    access_addr ip_addr_block
+    access_method 'md5'
+    action :grant
+    notifies :reload, postgres_service_resource, :delayed
+  end
+
+  firewall_rule "allow access to postgres from #{ip_addr_block}" do
     port opt['port']
     source ip_addr_block
     protocol :tcp

@@ -58,13 +58,13 @@ nginx_install 'default' do
 end
 
 nginx_conf 'gzip' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/gzip.conf.erb'
   action :create
 end
 
 nginx_conf 'resolver' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/resolver.conf.erb'
   variables(
     resolvers: %w[1.1.1.1 8.8.8.8 1.0.0.1 8.8.4.4],
@@ -78,7 +78,7 @@ stub_status_host = '127.0.0.1'
 stub_status_port = 8099
 
 nginx_vhost 'stub_status' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/stub_status.conf.erb'
   variables(
     host: stub_status_host,
@@ -167,7 +167,7 @@ ngx_vars = {
 }
 
 nginx_vhost 'netdata_master' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/netdata.vhost.conf.erb'
   variables(lazy {
     ngx_vars.merge(

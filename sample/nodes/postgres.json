@@ -25,6 +25,6 @@
     "fqdn": "postgres.final.volgactf.test"
   },
   "run_list": [
-    "recipe[main::postgres_server]"
+    "recipe[volgactf-final-main::postgres_server]"
   ]
 }

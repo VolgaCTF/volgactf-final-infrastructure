@@ -79,13 +79,13 @@ nginx_install 'default' do
 end
 
 nginx_conf 'gzip' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/gzip.conf.erb'
   action :create
 end
 
 nginx_conf 'resolver' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/resolver.conf.erb'
   variables(
     resolvers: %w[127.0.0.1],
@@ -99,7 +99,7 @@ stub_status_host = '127.0.0.1'
 stub_status_port = 8099
 
 nginx_vhost 'stub_status' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/stub_status.conf.erb'
   variables(
     host: stub_status_host,
@@ -150,15 +150,15 @@ repo_name = opt['image']['repo']
 
 unless opt['image']['registry'].nil?
   registry_addr = "#{opt['image']['registry']}"
-  registry_port = secret.get("docker:#{opt['image']['registry']}:port", default: 443)
+  registry_port = secret.get("docker:#{opt['image']['registry']}:port", default: 443, prefix_fqdn: false)
   unless registry_port == 443
     registry_addr += ":#{registry_port}"
   end
 
   docker_registry opt['image']['registry'] do
     serveraddress "https://#{registry_addr}/"
-    username secret.get("docker:#{opt['image']['registry']}:username")
-    password secret.get("docker:#{opt['image']['registry']}:password")
+    username secret.get("docker:#{opt['image']['registry']}:username", prefix_fqdn: false)
+    password secret.get("docker:#{opt['image']['registry']}:password", prefix_fqdn: false)
   end
 
   repo_name = registry_addr + "/#{repo_name}"

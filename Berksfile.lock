@@ -1,6 +1,4 @@
 DEPENDENCIES
-  main
-    path: local-cookbooks/main-cookbook
   netdata
     git: https://github.com/jmadureira/netdata-cookbook.git
     revision: 7858ca3cedac092db212f7497891544c6f5fc200
@@ -9,6 +7,8 @@ DEPENDENCIES
     git: https://github.com/VolgaCTF/volgactf-final-cookbook.git
     revision: aa9a19f96b618c88c321c5652ed6c9e3ca3753a8
     tag: v1.4.0
+  volgactf-final-main
+    path: local-cookbooks/volgactf-final-main
 
 GRAPH
   agit (0.1.2)
@@ -32,28 +32,6 @@ GRAPH
   instance (2.0.1)
   line (2.4.1)
   logrotate (2.2.0)
-  main (1.4.0)
-    agit (~> 0.1.2)
-    docker (~> 4.9.2)
-    firewall (~> 2.7.0)
-    git (~> 9.0.1)
-    graphicsmagick (~> 0.1.0)
-    instance (~> 2.0.1)
-    line (>= 2.3.0)
-    logrotate (~> 2.2.0)
-    netdata (~> 0.4.1)
-    ngx (~> 2.1.1)
-    ngx-modules (~> 1.1.0)
-    nodejs (~> 6.0.0)
-    ntp (~> 3.6.2)
-    postgresql (~> 7.1.4)
-    redisio (~> 3.0.0)
-    ruby_rbenv (~> 2.1.2)
-    secret (~> 1.0.0)
-    ssh_known_hosts (~> 6.2.0)
-    volgactf-final (~> 1.4.0)
-    vpn (~> 0.2.3)
-    yarn (~> 0.4.2)
   mingw (2.1.0)
     seven_zip (>= 0.0.0)
   netdata (0.4.1)
@@ -61,7 +39,7 @@ GRAPH
     yum-epel (< 3.0.0)
   ngx (2.1.1)
     ohai (~> 5.2.5)
-  ngx-modules (1.1.0)
+  ngx-modules (1.1.1)
     ngx (>= 2.0.0)
   nodejs (6.0.0)
     ark (>= 2.0.2)
@@ -98,11 +76,30 @@ GRAPH
     nodejs (~> 6.0.0)
     ruby_rbenv (~> 2.1.2)
     tls (~> 3.2.0)
+  volgactf-final-main (1.4.0)
+    agit (~> 0.1.2)
+    docker (~> 4.9.2)
+    firewall (~> 2.7.0)
+    git (~> 9.0.1)
+    graphicsmagick (~> 0.1.0)
+    instance (~> 2.0.1)
+    line (~> 2.4.1)
+    logrotate (~> 2.2.0)
+    netdata (~> 0.4.1)
+    ngx (~> 2.1.1)
+    ngx-modules (~> 1.1.1)
+    nodejs (~> 6.0.0)
+    ntp (~> 3.6.2)
+    postgresql (~> 7.1.4)
+    redisio (~> 3.0.0)
+    ruby_rbenv (~> 2.1.2)
+    secret (~> 1.0.0)
+    ssh_known_hosts (~> 6.2.0)
+    volgactf-final (~> 1.4.0)
+    vpn (~> 0.2.3)
   vpn (0.2.3)
     firewall (~> 2.7.0)
     line (>= 2.3.0)
   windows (6.0.0)
-  yarn (0.4.2)
-    apt (>= 0.0.0)
   yum-epel (2.1.2)
     compat_resource (>= 12.16.3)

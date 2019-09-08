@@ -34,7 +34,6 @@ include_recipe 'graphicsmagick::devel'
 include_recipe 'agit::cleanup'
 
 include_recipe 'nodejs::nodejs_from_binary'
-include_recipe 'yarn::default'
 
 opt = node['volgactf']['final']['master']
 instance = ::ChefCookbook::Instance::Helper.new(node)
@@ -42,7 +41,7 @@ secret = ::ChefCookbook::Secret::Helper.new(node)
 
 if opt['vpn']['enabled']
   vpn_connect 'default' do
-    config secret.get('openvpn:config', prefix_fqdn: false)
+    config secret.get('openvpn:config')
     action :create
   end
 end
@@ -106,13 +105,13 @@ nginx_install 'default' do
 end
 
 nginx_conf 'gzip' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/gzip.conf.erb'
   action :create
 end
 
 nginx_conf 'resolver' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/resolver.conf.erb'
   variables(
     resolvers: %w[127.0.0.1],
@@ -128,7 +127,7 @@ unless opt['vpn']['remote_server'].nil?
 end
 
 nginx_conf 'realip' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/realip.conf.erb'
   variables(
     header: 'X-Forwarded-For',
@@ -141,7 +140,7 @@ stub_status_host = '127.0.0.1'
 stub_status_port = 8099
 
 nginx_vhost 'stub_status' do
-  cookbook 'main'
+  cookbook 'volgactf-final-main'
   template 'nginx/stub_status.conf.erb'
   variables(
     host: stub_status_host,
@@ -195,13 +194,13 @@ volgactf_final_app 'default' do
 
   redis_host node['volgactf']['final']['redis']['host']
   redis_port node['volgactf']['final']['redis']['port']
-  redis_password secret.get('redis:password', default: nil, prefix_fqdn: false)
+  redis_password secret.get('redis:password', default: nil)
 
   postgres_host node['volgactf']['final']['postgres']['host']
   postgres_port node['volgactf']['final']['postgres']['port']
   postgres_db node['volgactf']['final']['postgres']['dbname']
   postgres_user node['volgactf']['final']['postgres']['username']
-  postgres_password secret.get("postgres:password:#{node['volgactf']['final']['postgres']['username']}", prefix_fqdn: false)
+  postgres_password secret.get("postgres:password:#{node['volgactf']['final']['postgres']['username']}")
 
   fqdn opt['fqdn']
   extra_fqdn opt['extra_fqdn']
@@ -220,7 +219,7 @@ volgactf_final_app 'default' do
 
   config node['volgactf']['final']['config']
 
-  branding_cookbook 'main'
+  branding_cookbook 'volgactf-final-main'
   branding_root 'branding-sample'
   branding_folders %w[
     images

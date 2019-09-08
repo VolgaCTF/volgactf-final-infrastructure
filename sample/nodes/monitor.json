@@ -45,6 +45,6 @@
     "fqdn": "monitor.final.volgactf.test"
   },
   "run_list": [
-    "recipe[main::monitor_server]"
+    "recipe[volgactf-final-main::monitor_server]"
   ]
 }

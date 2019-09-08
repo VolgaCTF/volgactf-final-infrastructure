@@ -25,6 +25,6 @@
     "fqdn": "master.final.volgactf.test"
   },
   "run_list": [
-    "recipe[main::master_server]"
+    "recipe[volgactf-final-main::master_server]"
   ]
 }

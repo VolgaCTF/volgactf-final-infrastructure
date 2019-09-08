@@ -35,6 +35,6 @@
     "fqdn": "checker1.final.volgactf.test"
   },
   "run_list": [
-    "recipe[main::checker_server]"
+    "recipe[volgactf-final-main::checker_server]"
   ]
 }

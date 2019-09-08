@@ -25,6 +25,6 @@
     "fqdn": "redis.final.volgactf.test"
   },
   "run_list": [
-    "recipe[main::redis_server]"
+    "recipe[volgactf-final-main::redis_server]"
   ]
 }

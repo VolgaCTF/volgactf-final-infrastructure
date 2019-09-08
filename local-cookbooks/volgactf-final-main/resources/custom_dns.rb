@@ -35,7 +35,7 @@ action :install do
   end
 
   template ::File.join(new_resource.service_conf_dir, 'default.conf') do
-    cookbook 'main'
+    cookbook 'volgactf-final-main'
     source 'dnsmasq/default.conf.erb'
     variables(
       listen_address: new_resource.listen_address,
@@ -48,7 +48,7 @@ action :install do
   end
 
   template ::File.join(new_resource.service_conf_dir, 'records.conf') do
-    cookbook 'main'
+    cookbook 'volgactf-final-main'
     source 'dnsmasq/records.conf.erb'
     variables(
       records: new_resource.records
