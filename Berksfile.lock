@@ -5,8 +5,8 @@ DEPENDENCIES
     branch: 7858ca3cedac092db212f7497891544c6f5fc200
   volgactf-final
     git: https://github.com/VolgaCTF/volgactf-final-cookbook.git
-    revision: aa9a19f96b618c88c321c5652ed6c9e3ca3753a8
-    tag: v1.4.0
+    revision: 0c0d3f521117aef6e6888db49378e2630dfaab3c
+    tag: v1.4.1
   volgactf-final-main
     path: local-cookbooks/volgactf-final-main
 
@@ -69,7 +69,7 @@ GRAPH
   ssh_known_hosts (6.2.0)
   tls (3.2.0)
   ulimit (1.0.0)
-  volgactf-final (1.4.0)
+  volgactf-final (1.4.1)
     agit (~> 0.1.2)
     htpasswd (~> 0.3.0)
     ngx (~> 2.1.1)

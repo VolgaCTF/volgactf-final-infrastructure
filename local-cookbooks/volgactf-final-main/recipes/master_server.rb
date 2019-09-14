@@ -215,6 +215,9 @@ volgactf_final_app 'default' do
   flag_sign_key_private secret.get('volgactf-final:flag:sign_key:private', prefix_fqdn: false)
   flag_sign_key_public secret.get('volgactf-final:flag:sign_key:public', prefix_fqdn: false)
 
+  web_processes opt['web_processes']
+  queue_processes opt['queue_processes']
+
   log_level opt['log_level']
 
   config node['volgactf']['final']['config']
