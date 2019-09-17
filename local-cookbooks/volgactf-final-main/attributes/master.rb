@@ -5,6 +5,10 @@ default['volgactf']['final']['master']['repo_mode'] = 'https'
 default['volgactf']['final']['master']['run_mode'] = 'production'
 default['volgactf']['final']['master']['log_level'] = 'INFO'
 
+default['volgactf']['final']['master']['web_processes'] = 2
+default['volgactf']['final']['master']['queue_processes'] = 2
+default['volgactf']['final']['master']['stream_processes'] = 2
+
 default['volgactf']['final']['master']['fqdn'] = nil
 default['volgactf']['final']['master']['extra_fqdn'] = []
 

@@ -53,7 +53,7 @@ def main(name, environment):
         }
     elif name == 'netdata':
         return {
-            'id': 'development',
+            'id': environment,
             'stream': {
                 'api_key': {
                     'master_server': str(uuid.uuid4()),

@@ -217,6 +217,7 @@ volgactf_final_app 'default' do
 
   web_processes opt['web_processes']
   queue_processes opt['queue_processes']
+  stream_processes opt['stream_processes']
 
   log_level opt['log_level']
 

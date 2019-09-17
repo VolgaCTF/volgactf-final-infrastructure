@@ -138,6 +138,9 @@ logrotate_app 'nginx' do
 end
 
 docker_service 'default' do
+  unless opt['docker']['bip'].nil?
+    bip opt['docker']['bip']
+  end
   action %i[create start]
 end
 
@@ -166,7 +169,7 @@ end
 
 volgactf_final_checker opt['image']['name'] do
   fqdn opt['fqdn']
-  docker_image_repo opt['image']['repo']
+  docker_image_repo repo_name
   docker_image_tag opt['image']['tag']
   docker_network_name opt['network']['name']
   docker_network_gateway opt['network']['gateway']

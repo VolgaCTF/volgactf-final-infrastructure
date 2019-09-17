@@ -51,6 +51,7 @@ sysctl 'net.core.somaxconn' do
   value 512
   action :apply
   notifies :restart, redis_service_resource, :delayed
+  only_if { ::File.exist?('/proc/sys/net/core/somaxconn') }
 end
 
 sysctl 'vm.overcommit_memory' do

@@ -9,6 +9,8 @@ default['volgactf']['final']['checker']['image']['registry'] = nil
 default['volgactf']['final']['checker']['image']['repo'] = nil
 default['volgactf']['final']['checker']['image']['tag'] = 'latest'
 
+default['volgactf']['final']['checker']['docker']['bip'] = nil
+
 default['volgactf']['final']['checker']['network']['name'] = nil
 default['volgactf']['final']['checker']['network']['subnet'] = '192.168.163.0/24'
 default['volgactf']['final']['checker']['network']['gateway'] = '192.168.163.1'
