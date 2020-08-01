@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+cd $HOME
+git clone https://github.com/aspyatkin/dotfiles2
+cd dotfiles2
+./install
+if [[ $EUID -eq 0 ]]; then
+  chsh -s /bin/zsh
+else
+  sudo chsh -s /bin/zsh $USER
+fi

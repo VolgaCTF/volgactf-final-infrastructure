@@ -118,11 +118,11 @@ end
 
 netdata_install 'default' do
   install_method 'source'
-  git_repository opt['netdata']['git_repository']
-  git_revision opt['netdata']['git_revision']
+  git_repository node['volgactf']['final']['netdata']['git_repository']
+  git_revision node['volgactf']['final']['netdata']['git_revision']
   git_source_directory '/opt/netdata'
-  autoupdate true
-  update true
+  autoupdate false
+  update false
 end
 
 netdata_config 'global' do

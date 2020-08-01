@@ -45,8 +45,6 @@ else
   exit 3
 fi
 
-ssh $NODE_FQDN "sudo hostnamectl set-hostname $NODE_FQDN"
-cat $PWD/script/setup_prerequisites | ssh $NODE_FQDN
-
-SSH_USER=`ssh -G $NODE_FQDN | awk '$1 == "user" {print $2}'`
-KNIFE_NODE_ENVIRONMENT="$NODE_ENVIRONMENT" bundle exec knife zero bootstrap "$@" --connection-user $SSH_USER --environment "$NODE_ENVIRONMENT" --node-name "$NODE_NAME" "$NODE_FQDN" --no-converge
+ssh $NODE_FQDN "sudo apt install -y zsh git vim"
+cat $PWD/script/setup_dotfiles | ssh $NODE_FQDN
+cat $PWD/script/setup_dotfiles | ssh $NODE_FQDN "sudo su"
