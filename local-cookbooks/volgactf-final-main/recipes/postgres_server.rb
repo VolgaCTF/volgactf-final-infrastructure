@@ -92,7 +92,8 @@ if opt['netdata']['enabled']
     )
   end
 
-  package 'python-psycopg2'
+  package 'python-is-python3'
+  package 'python3-psycopg2'
 
   netdata_python_plugin 'postgres' do
     owner 'netdata'

@@ -59,7 +59,8 @@ def main(name, environment):
                     'master_server': str(uuid.uuid4()),
                     'redis_server': str(uuid.uuid4()),
                     'postgres_server': str(uuid.uuid4()),
-                    'checker1_server': str(uuid.uuid4())
+                    'checker1_server': str(uuid.uuid4()),
+                    'checker2_server': str(uuid.uuid4())
                 }
             }
         }

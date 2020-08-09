@@ -29,12 +29,19 @@ package 'net-tools'
 include_recipe 'ntp::default'
 include_recipe 'firewall::default'
 
+package 'cron'
+
+service 'cron' do
+  action [:enable, :start]
+end
+
 opt = node['volgactf']['final']['monitor']
 
 ngx_http_stub_status_module 'default'
 
 nginx_install 'default' do
-  with_ipv6 false
+  version node['ngx']['version']
+  checksum node['ngx']['checksum']
   with_threads false
   with_debug false
   directives(

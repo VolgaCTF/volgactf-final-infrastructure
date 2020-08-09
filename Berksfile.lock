@@ -5,8 +5,8 @@ DEPENDENCIES
     branch: 7858ca3cedac092db212f7497891544c6f5fc200
   volgactf-final
     git: https://github.com/VolgaCTF/volgactf-final-cookbook.git
-    revision: 8c7b9780a510f14641bdf627fb2c6de6d51ef906
-    tag: v1.4.2
+    revision: e20524829472aaa485e9fa3c342a4385a42cde9b
+    tag: v1.4.3
   volgactf-final-main
     path: local-cookbooks/volgactf-final-main
 
@@ -36,10 +36,10 @@ GRAPH
   netdata (0.4.1)
     apt (< 7.0.0)
     yum-epel (< 3.0.0)
-  ngx (2.1.2)
+  ngx (2.2.0)
     ohai (~> 5.2.5)
-  ngx-modules (1.1.1)
-    ngx (>= 2.0.0)
+  ngx-modules (1.3.0)
+    ngx (>= 2.2.0)
   nodejs (6.0.0)
     ark (>= 2.0.2)
     build-essential (>= 5.0)
@@ -61,16 +61,16 @@ GRAPH
   ruby_rbenv (2.1.3)
   secret (1.0.0)
     instance (~> 2.0.0)
-  selinux_policy (2.4.1)
+  selinux_policy (2.4.3)
   seven_zip (3.1.2)
     windows (>= 0.0.0)
   ssh_known_hosts (6.2.0)
   tls (3.2.0)
-  ulimit (1.1.0)
-  volgactf-final (1.4.2)
+  ulimit (1.1.1)
+  volgactf-final (1.4.3)
     agit (~> 0.1.2)
     htpasswd (~> 0.3.0)
-    ngx (~> 2.1.1)
+    ngx (>= 2.2.0)
     nodejs (~> 6.0.0)
     ruby_rbenv (~> 2.1.2)
     tls (~> 3.2.0)
@@ -84,11 +84,11 @@ GRAPH
     line (~> 2.4.1)
     logrotate (~> 2.2.0)
     netdata (~> 0.4.1)
-    ngx (~> 2.1.1)
-    ngx-modules (~> 1.1.1)
+    ngx (~> 2.2.0)
+    ngx-modules (~> 1.3.0)
     nodejs (~> 6.0.0)
     ntp (~> 3.6.2)
-    postgresql (~> 7.1.4)
+    postgresql (~> 7.1.9)
     redisio (~> 4.1.0)
     ruby_rbenv (~> 2.1.2)
     secret (~> 1.0.0)
